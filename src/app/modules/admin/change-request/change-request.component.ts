@@ -17,6 +17,7 @@ interface ChangeRequest {
   templateUrl: './change-request.component.html',
   styleUrls: ['./change-request.component.css']
 })
+//Change request component
 export class ChangeRequestComponent implements OnInit {
   @ViewChild('createForm') createForm: any;
   @ViewChild('confirmationModal') confirmationModal: any;
