@@ -32,3 +32,4 @@ For UI responsiveness Bootstrap has been used along with media queries.
 # Code Quality
 
 To maintain code quality, a gated check in process has been set up which runs 'ng lint --fix' command which would make sure that commit could only happen if linting has been done in code, linting makes sure all the recommended best parctices are followed in code. For setting this up, a package has been used called 'Husky' which would leverage pre commit hooks in git to perform gated check in.
+As of now I have removed this since TSLint is deprecated and from Angular 12 onwards google has stopped providing linting config by default. Something like ESLint can be integrated.
