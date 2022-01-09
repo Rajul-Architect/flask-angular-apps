@@ -1,0 +1,30 @@
+<div class="container">
+    <div class="login-form">
+        <div class="card">
+            <div class="card-header">
+                Login
+            </div>
+           <div class="card-body">
+            <form #f="ngForm" name="form" (ngSubmit)="f.submitted && login(f.form)" novalidate>
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" class="form-control" [(ngModel)]="creds.username" id="username"
+                        name="username" #username="ngModel" required>
+                    <span class="error" *ngIf="f.submitted && !username.valid">User Name is required</span>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password" [(ngModel)]="creds.password"
+                        name="password" #password="ngModel" required>
+                    <span class="error" *ngIf="f.submitted && !password.valid">Password is required</span>
+                </div>
+                <span class="error" *ngIf="loginFailed">Login Failed</span>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </div>
+            </form>
+           </div> 
+        </div>
+    </div>
+
+</div>

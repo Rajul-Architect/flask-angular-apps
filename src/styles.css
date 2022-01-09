@@ -1,1 +1,32 @@
 /* You can add global styles to this file, and also import other style files */
+.pull-right {
+  float: right;
+}
+.btn-hollow {
+  border-style: solid;
+  border-width: 1px;
+  border-color: grey;
+}
+.error {
+  color: crimson;
+}
+.padding-0 {
+  padding: 0px !important;
+}
+.ngx-pagination {
+  padding: 0 !important;
+}
+.app-container {
+  padding-left: 100px !important;
+  padding-right: 100px !important;
+}
+.pull-left {
+  float: left;
+}
+.username {
+  position: absolute;
+  right: 20px;
+}
+.navbar-dark {
+  color: white !important;
+}

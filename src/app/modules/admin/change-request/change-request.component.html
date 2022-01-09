@@ -1,0 +1,122 @@
+<div class="row margin-0">
+    <div class="col-lg-12">
+
+    </div>
+    <div class="col-lg-12">
+        <br>
+        <div class="card">
+            <div class="card-header">
+                <span class="title pull-left">Change Requests</span>
+                <button class="btn btn-success pull-right" id="add" (click)="openModal()">Add New Request</button>
+            </div>
+            <div class="card-body">
+                <div class="row margin-0">
+                    <div class="col-lg-5 col-md-12 col-xs-12">
+                        <div class="form-group">
+                            <input placeholder="Search By Request ID" [(ngModel)]="pageModel.searchRequest" type="text"
+                                class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-lg-5 col-md-12 col-xs-12">
+                        <div class="form-group">
+                            <input [(ngModel)]="pageModel.searchRequestOwner" placeholder="Search By Owner" type="text"
+                                class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-12 col-xs-12">
+                        <button type="button" class="btn btn-hollow btn-icon col-lg-6" (click)="clear();getPaginatedData()"><i class="fa fa-refresh"></i></button>
+                        <button type="button" class="btn btn-primary btn-icon col-lg-6" (click)="getPaginatedData()"><i class="fa fa-search"></i></button>
+                    </div>
+                </div>
+                <br>
+                <div class="col-lg-12 padding-0">
+                    <app-pagination class="pull-right" [id]="'pagination'" (pageChange)="changePage($event)"
+                        [maxSize]="pageModel.maxSize"></app-pagination>
+                </div>
+                <br>
+                <div>
+                    <i *ngIf="loading" class="fa fa-spinner fa-spin fa-2x spinner"></i>
+                    <table id="cr-table" class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <td>RequestID</td>
+                                <td class="lg-col">Type</td>
+                                <td>Description</td>
+                                <td>Submitted By</td>
+                                <td class="lg-col">Status</td>
+                                <td class="lg-col">Date</td>
+                                <td></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let request of componentData | paginate: { id: 'pagination',
+                            itemsPerPage: pageModel.size,
+                            currentPage: pageModel.page,
+                            totalItems: totalPages }">
+                                <td width="20%">{{request.id}}</td>
+                                <td class="lg-col">{{getNameByType(request.type)}}</td>
+                                <td width="20%">{{request.description}}</td>
+                                <td>{{request.submittedBy}}</td>
+                                <td class="lg-col">{{request.status}}</td>
+                                <td class="lg-col">{{request.date}}</td>
+                                <td>
+                                    <div class="text-center">
+                                        <i [id]="'check-' + request.id" class="fa fa-check check-icon"
+                                            (click)="openConfirmation(request,'Approved')"></i>
+                                        <i class="fa fa-close cross-icon"
+                                            (click)="openConfirmation(request,'Cancelled')"></i>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<ng-template #createForm>
+    <form name="form" #f="ngForm" (ngSubmit)="create(f.form)" novalidate>
+        <div class="form-group">
+            <label for="date">Submitted Date&nbsp;</label>
+            <input id="date" class="form-control" name="date" #date="ngModel" [(ngModel)]="changeRequestModel.date"
+                disabled>
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="submitted">Submitted By:&nbsp;</label>
+            <input id="submitted" class="form-control" name="submitted" #submitted="ngModel" [(ngModel)]="changeRequestModel.submittedBy"
+                disabled>
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="crType">Change Request Type</label>
+            <select class="form-control" name="crType" [(ngModel)]="changeRequestModel.type" #crType="ngModel" required>
+                <option *ngFor="let type of types" [ngValue]="type.id">{{type.name}}</option>
+            </select>
+            <span class="error" *ngIf="f.submitted && !crType.valid">Type is required</span>
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea #description="ngModel" name="description" [(ngModel)]="changeRequestModel.description"
+                class="form-control" id="description" placeholder="Change Request Description" required>
+
+            </textarea>
+            <span class="error" id="description-error" *ngIf="f.submitted && !description.valid">Description is required</span>
+        </div>
+        <br>
+        <div class="text-center">
+            <button type="button" id="create-close" class="btn btn-hollow" (click)="close()">Cancel</button>
+            <button type="submit" id="create-submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+</ng-template>
+<ng-template #confirmationModal>
+    <label>Are you sure you want change the status of the request to {{changeRequestModel.status}}</label>
+    <div class="text-center">
+        <button type="button" class="btn btn-hollow" id="confirm-close" (click)="close()">Cancel</button>
+        <button type="button" class="btn btn-primary" (click)="updateStatus()">OK</button>
+    </div>
+</ng-template>

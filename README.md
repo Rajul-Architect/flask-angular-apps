@@ -1,27 +1,34 @@
 # ChangeRequestApp
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.0.3.
+# This Project is developed using below tech stack:
 
-## Development server
+-Angular
+-Postgres DB
+-Bootstrap
+-Media Queries
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+# Project has below major pieces:
 
-## Code scaffolding
+-app-common: A common module having components/code blocks, functions, services which can be reused across various modules.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+-components: A feature module having all reusable components of the application.
 
-## Build
+-modules: Majorly consists of views in the application. Some of them belong to global app.module as they are supposed to be globally accessible to other views e.g. Login. On other hand there are some independent modules like admin.module which has their own child routes. These modules are configured as being lazy loaded.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+-Http.intercepter: A request intercepter which would append the authentication token for every outgoing request.
 
-## Running unit tests
+-Auth.guard: A route guard to protect unauthorized access.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+-API.proxy: A proxy service to make http calls.
 
-## Running end-to-end tests
+# Unit Testing
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Basic unit test cases have been written in Karma and Jasmine for change-request module. To execute them please run 'ng test'.
 
-## Further help
+# Responsiveness
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+For UI responsiveness Bootstrap has been used along with media queries.
+
+# Code Quality
+
+To maintain code quality, a gated check in process has been set up which runs 'ng lint --fix' command which would make sure that commit could only happen if linting has been done in code, linting makes sure all the recommended best parctices are followed in code. For setting this up, a package has been used called 'Husky' which would leverage pre commit hooks in git to perform gated check in.
