@@ -1,0 +1,15 @@
+-- Table: CR.CR_Type_Master
+
+-- DROP TABLE "CR"."CR_Type_Master";
+
+CREATE TABLE "CR"."CR_Type_Master"
+(
+    "CR_Type_ID" integer NOT NULL,
+    "CR_Type_Name" character varying(5000) COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT "CR_Type_Master_pkey" PRIMARY KEY ("CR_Type_ID")
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE "CR"."CR_Type_Master"
+    OWNER to postgres;

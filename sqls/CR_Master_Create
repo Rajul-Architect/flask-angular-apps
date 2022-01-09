@@ -1,0 +1,19 @@
+-- Table: CR.CR_Master
+
+-- DROP TABLE "CR"."CR_Master";
+
+CREATE TABLE "CR"."CR_Master"
+(
+    "Request_ID" character varying(5000) COLLATE pg_catalog."default" NOT NULL,
+    "Date" date NOT NULL,
+    "Type" character varying(5000) COLLATE pg_catalog."default" NOT NULL,
+    "Status" character varying(5000) COLLATE pg_catalog."default" NOT NULL,
+    "Description" character varying(5000) COLLATE pg_catalog."default",
+    "Submitted_By" character varying(5000) COLLATE pg_catalog."default",
+    CONSTRAINT "CR_Master_pkey" PRIMARY KEY ("Request_ID")
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE "CR"."CR_Master"
+    OWNER to "Change_Request";

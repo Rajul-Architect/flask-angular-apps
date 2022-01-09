@@ -1,0 +1,17 @@
+-- Table: CR.User
+
+-- DROP TABLE "CR"."User";
+
+CREATE TABLE "CR"."User"
+(
+    "UserName" character varying(100) COLLATE pg_catalog."default" NOT NULL,
+    "Password" character varying(100) COLLATE pg_catalog."default" NOT NULL,
+    "First Name" character varying(100) COLLATE pg_catalog."default" NOT NULL,
+    "Last Name" character varying(100) COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT "User_pkey" PRIMARY KEY ("UserName")
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE "CR"."User"
+    OWNER to postgres;
