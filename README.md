@@ -3,7 +3,7 @@
 # ui 
 Angular App
 
-# Sqls 
+# sqls 
 Sql scripts for table creation in postgres
 
 # change-request-service 
