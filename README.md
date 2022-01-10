@@ -9,5 +9,5 @@ Sql scripts for table creation in postgres
 # change-request-service 
 Python Flask Service 
 
-# Artifacts
+# artifacts
 Project Documents(Sprint plan)
