@@ -24,8 +24,12 @@
   float: left;
 }
 .username {
-  position: absolute;
+  position: absolute!important;
+  top:15%;
   right: 20px;
+}
+.username .nav-link{
+  color:white!important;
 }
 .navbar-dark {
   color: white !important;
