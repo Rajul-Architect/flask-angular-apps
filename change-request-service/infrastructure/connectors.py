@@ -1,5 +1,4 @@
 from os import environ
-import pymysql
 import psycopg2
 
 def create_pg_connection():

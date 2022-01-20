@@ -79,12 +79,6 @@
 <ng-template #createForm>
     <form name="form" #f="ngForm" (ngSubmit)="create(f.form)" novalidate>
         <div class="form-group">
-            <label for="date">Submitted Date&nbsp;</label>
-            <input id="date" class="form-control" name="date" #date="ngModel" [(ngModel)]="changeRequestModel.date"
-                disabled>
-        </div>
-        <br>
-        <div class="form-group">
             <label for="submitted">Submitted By:&nbsp;</label>
             <input id="submitted" class="form-control" name="submitted" #submitted="ngModel" [(ngModel)]="changeRequestModel.submittedBy"
                 disabled>
@@ -114,8 +108,9 @@
     </form>
 </ng-template>
 <ng-template #confirmationModal>
-    <label>Are you sure you want change the status of the request to {{changeRequestModel.status}}</label>
+    <label>Are you sure you want change the status of the request?</label>
     <div class="text-center">
+        <br>
         <button type="button" class="btn btn-hollow" id="confirm-close" (click)="close()">Cancel</button>
         <button type="button" class="btn btn-primary" (click)="updateStatus()">OK</button>
     </div>

@@ -20,7 +20,7 @@ class Login(Resource):
             token = jwt.encode(
                 {'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=45)},
                 os.environ['SECRET_KEY'], "HS256")
-            encoded_jwt = token.decode('UTF-8')
-            return {'token': encoded_jwt, 'firstName': result[0][2], 'lastName': result[0][3]}, 200
+            #encoded_jwt = token.decode('UTF-8')
+            return {'token': token, 'firstName': result[0][2], 'lastName': result[0][3]}, 200
         else:
             return "Login is required", 401

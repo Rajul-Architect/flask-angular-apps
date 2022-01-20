@@ -18,6 +18,6 @@ export class ModalService {
     });
   }
   public closeModal() {
-    this.modalService.hide(1);
+    this.modalService.hide();
   }
 }

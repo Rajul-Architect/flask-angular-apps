@@ -15,7 +15,7 @@ export class AuthGuard implements CanActivate {
     canActivate(
         route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-        return localStorage.getItem('currentUser') ? (new Promise(res => {
+        return (new Promise(res => {
             this.httpClient.get(environment.loginUrl).subscribe(
                 (active) => {
                     res(true)
@@ -25,6 +25,6 @@ export class AuthGuard implements CanActivate {
                     res(false);
                 }
             );
-        })) : false;
+        }));
     }
 }

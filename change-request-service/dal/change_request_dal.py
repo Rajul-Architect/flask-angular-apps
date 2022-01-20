@@ -7,7 +7,7 @@ class ChangeRequestDAL:
         try:
             cursor = connection.cursor()
             query = 'Insert Into "CR"."CR_Master"("Request_ID", "Type", "Date", "Description", "Status", "Submitted_By") values(%s,%s,%s,%s,%s,%s)'
-            cursor.execute(query, (str(uuid.uuid4()), change_request["type"], change_request["date"], change_request["description"], "Submitted", change_request['submittedBy']))
+            cursor.execute(query, (str(uuid.uuid4()), change_request["type"], "NOW()", change_request["description"], "Submitted", change_request['submittedBy']))
             connection.commit()
             results = {'recCount': cursor.rowcount}
             return results
@@ -22,7 +22,7 @@ class ChangeRequestDAL:
         connection = connectors.create_pg_connection()
         try:
             cursor = connection.cursor()
-            query = 'Select count(*) OVER() AS "Total", "Request_ID", "Type", "Description", "Status", TO_CHAR("Date", \'YYYY-MM-DD\') AS "Date", "Submitted_By" from "CR"."CR_Master" '
+            query = 'Select count(*) OVER() AS "Total", "Request_ID", "Type", "Description", "Status", TO_CHAR("Date", \'YYYY-MM-DD HH:MM:SS\') AS "Date", "Submitted_By" from "CR"."CR_Master" '
             if requestidsearch != '' or requestownersearch != '':
                 query += ' WHERE '
             if requestidsearch != '':
@@ -54,8 +54,8 @@ class ChangeRequestDAL:
         connection = connectors.create_pg_connection()
         try:
             cursor = connection.cursor()
-            query = 'Update "CR"."CR_Master" set "Status"=%s Where "Request_ID"=%s'
-            cursor.execute(query, (request["status"], request["id"]))
+            query = 'Update "CR"."CR_Master" set "Status"=%s, "Date"=%s Where "Request_ID"=%s'
+            cursor.execute(query, (request["status"], "NOW()",request["id"]))
             connection.commit()
             results = {'recCount': cursor.rowcount}
             return results
